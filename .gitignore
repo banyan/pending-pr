@@ -4,3 +4,4 @@ node_modules
 lib/**/*.js
 lib-cov
 .template
+/.pending-pr
