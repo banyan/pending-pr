@@ -1,0 +1,10 @@
+{
+    "token": "foo",
+    "repos": [
+        "foo/bar"
+    ],
+    "members": [
+        "@banyan",
+        "@shikakun"
+    ]
+}
