@@ -14,6 +14,7 @@ exports.run = ->
     .parse(process.argv)
 
   args = program.args
+  program.help() unless args[0]?
 
   if args[0] is 'init'
     initializer = new Initializer
