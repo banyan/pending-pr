@@ -1,12 +1,13 @@
 program  = require 'commander'
 pkg      = require './../package'
+Config   = require './config'
 Commands = require './commands'
 
 exports.run = ->
   program
     .version(pkg.version)
     .option('-t, --token [token]', 'GitHub API Token')
-    .option('-c, --config [file]', '.pending-pr')
+    .option('-c, --config [file]', 'Specify .pending-pr file path')
     .option('-a, --all',           'All Pull Requests')
     .parse(process.argv)
 
