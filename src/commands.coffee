@@ -21,30 +21,6 @@ module.exports = class Commands
   execute: (method, options...) ->
     @[method](options...)
 
-  @init: =>
-    filePath = "#{process.cwd()}/.pending-pr"
-
-    async.series [(callback) ->
-      promptly.prompt "Token: ", (err, value) ->
-        callback(null, token: value)
-
-    , (callback) ->
-      promptly.prompt "Repos: ", (err, value) ->
-        callback(null, repos: value.split(' '))
-
-    , (callback) ->
-      promptly.prompt "Members: ", default: '', (err, value) ->
-        callback(null, members: value.split(' '))
-
-    ], (err, results) ->
-      throw err if err
-
-      templatePath = './templates/pending-pr.tpl'
-      templateFile = fs.readFileSync(templatePath).toString()
-      fs.writeFileSync filePath, _.template(templateFile, _.extend(results...))
-
-      logger.info "create #{filePath}"
-
   list: =>
     @_list (pullRequests) ->
       _.each pullRequests, (pr, i) =>
