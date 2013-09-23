@@ -63,6 +63,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 $ grunt test
 ```
 
+### TODO
+
+* Customizable message
+* Configurable of unmergeble keywords
+
 ## License
 
 Copyright (c) 2013 Kohei Hasegawa
