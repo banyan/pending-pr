@@ -60,8 +60,12 @@ module.exports = class Commands
         user: u
         repo: r
       }, callback
-    , (err, results) ->
-      rows = _.flatten results
+    , (err, results) =>
+      rows = _.chain(results)
+        .flatten()
+        .reject((result) => /wip/i.test(result.title) and !@program.unmergeble) # TODO customizable
+        .value()
+
       do (rows) -> fn rows
 
   _postComment: (pr) =>

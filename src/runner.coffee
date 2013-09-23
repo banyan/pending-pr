@@ -9,10 +9,10 @@ Initializer = require './initializer'
 exports.run = ->
   program
     .version(pkg.version)
-    .option('-t, --token [token]', 'GitHub API Token')
-    .option('-c, --config [file]', 'Specify .pending-pr file path')
-    .option('-g, --global',        'Read and write from ~/.pending-pr')
-    .option('-a, --all',           'All Pull Requests')
+    .option('-c, --config [file]',     'specify .pending-pr file path')
+    .option('-g, --global',            'read and write from ~/.pending-pr')
+    .option('-a, --all',               'all pull requests')
+    .option('-u, --unmergeble',        'include unmergeble pull requests')
     .parse(process.argv)
 
   args = program.args
