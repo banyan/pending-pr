@@ -1,10 +1,3 @@
-chai      = require 'chai'
-expect    = chai.expect
-sinon     = require 'sinon'
-sinonChai = require 'sinon-chai'
-
-chai.use(sinonChai)
-
 Config = require('../src/config.coffee')
 
 describe '#constructor', ->

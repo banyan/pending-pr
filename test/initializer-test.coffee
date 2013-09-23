@@ -1,13 +1,7 @@
 _         = require 'underscore'
-logger    = require 'loggy'
 fs        = require 'fs'
-chai      = require 'chai'
-expect    = chai.expect
-sinon     = require 'sinon'
-sinonChai = require 'sinon-chai'
 path      = require 'path'
-
-chai.use(sinonChai)
+logger    = require 'loggy'
 
 Initializer = require('../src/initializer.coffee')
 

@@ -21,6 +21,7 @@ module.exports = (grunt) ->
       all:
         src: ['test/**/*.coffee']
         options:
+          require: 'test/test-helper'
           timeout: 3000
           ignoreLeaks: false
           ui: 'bdd'
