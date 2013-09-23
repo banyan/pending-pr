@@ -49,6 +49,10 @@ Commands:
     open                 Browse pull request. Short-cut: o
 ```
 
+## Tips
+
+With Jenkins or cron, it can be checked whether pending PRs exists and notify regulary.
+
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
