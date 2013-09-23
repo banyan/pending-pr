@@ -35,7 +35,6 @@ module.exports = class Commands
           console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
 
         console.log ""
-
         promptly.choose "ping to which? ", [1..pullRequests.length], (err, value) =>
           @_postComment pullRequests[value - 1]
 
@@ -51,7 +50,6 @@ module.exports = class Commands
           console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
 
         console.log ""
-
         promptly.choose "browse which? ", [1..pullRequests.length], (err, value) =>
           open pullRequests[value - 1].html_url
 
