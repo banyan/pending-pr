@@ -13,7 +13,18 @@ exports.run = ->
     .option('-g, --global',            'read and write from ~/.pending-pr')
     .option('-a, --all',               'all pull requests')
     .option('-u, --unmergeble',        'include unmergeble pull requests')
-    .parse(process.argv)
+
+  program.on "--help", ->
+    console.log "  Commands:"
+    console.log ""
+    console.log "    init                 Create .pending-pr config file."
+    console.log "    list                 Show mergeble pull requests. Short-cut: l"
+    console.log "    count                Show mergeble pull requests size. Short-cut: c"
+    console.log "    ping                 Ping to pull request to be merged. Short-cut: p"
+    console.log "    open                 Browse pull request. Short-cut: o"
+    console.log ""
+
+  program.parse process.argv
 
   args = program.args
   program.help() unless args[0]?
