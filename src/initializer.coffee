@@ -6,7 +6,7 @@ promptly  = require 'promptly'
 
 module.exports = class Initializer
   fileName     = '.pending-pr'
-  templatePath = './templates/pending-pr.tpl'
+  templatePath = '../templates/pending-pr.tpl'
 
   constructor: ({@global, @filePath}) ->
     @filePath or= if @global
