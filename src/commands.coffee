@@ -8,8 +8,8 @@ promptly  = require 'promptly'
 module.exports = class Commands
   constructor: ({@program, @config, @client}) ->
 
-  execute: (method, options...) ->
-    @[method](options...)
+  execute: (method, args...) ->
+    @[method](args...)
 
   list: =>
     @_list (pullRequests) ->
