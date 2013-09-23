@@ -13,7 +13,7 @@ module.exports = class Commands
 
   list: =>
     @_list (pullRequests) ->
-      _.each pullRequests, (pr, i) =>
+      for pr, i in pullRequests
         console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
 
   size: =>
@@ -26,12 +26,12 @@ module.exports = class Commands
   ping: (index) =>
     @_list (pullRequests) =>
       if @program.all
-        _.each pullRequests, (pr) =>
+        for pr, i in pullRequests
           @_postComment pr
       else if index?
         @_postComment pullRequests[index - 1]
       else
-        _.each pullRequests, (pr, i) =>
+        for pr, i in pullRequests
           console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
 
         console.log ""
@@ -47,7 +47,7 @@ module.exports = class Commands
       else if index?
         open pullRequests[index - 1].html_url
       else
-        _.each pullRequests, (pr, i) =>
+        for pr, i in pullRequests
           console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
 
         console.log ""
