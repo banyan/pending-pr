@@ -34,16 +34,26 @@ module.exports = class Commands
         _.each pullRequests, (pr, i) =>
           console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
 
+        console.log ""
+
         promptly.choose "ping to which? ", [1..pullRequests.length], (err, value) =>
           @_postComment pullRequests[value - 1]
 
-  open: (number) =>
+  open: (index) =>
     @_list (pullRequests) =>
-      if @all
+      if @program.all
         for pr in pullRequests
           open pr.html_url
+      else if index?
+        open pullRequests[index - 1].html_url
       else
-        open pullRequests[number].html_url
+        _.each pullRequests, (pr, i) =>
+          console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
+
+        console.log ""
+
+        promptly.choose "browse which? ", [1..pullRequests.length], (err, value) =>
+          open pullRequests[value - 1].html_url
 
   _list: (fn) =>
     async.map @config.repos, (repo, callback) =>
@@ -53,10 +63,8 @@ module.exports = class Commands
         repo: r
       }, callback
     , (err, results) ->
-      a = _.flatten _.map results, (rows) ->
-        _.filter rows, (row) -> row.url
-
-      do (a) -> fn a
+      rows = _.flatten results
+      do (rows) -> fn rows
 
   _postComment: (pr) =>
     [user, repo] = pr.base.repo.full_name.split('/')
