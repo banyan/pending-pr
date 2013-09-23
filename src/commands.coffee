@@ -16,7 +16,7 @@ module.exports = class Commands
       for pr, i in pullRequests
         console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
 
-  size: =>
+  count: =>
     @_list (pullRequests) ->
       console.log pullRequests.length
 
