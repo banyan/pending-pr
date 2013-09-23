@@ -53,6 +53,12 @@ module.exports = class Commands
         promptly.choose "open which? ", [1..pullRequests.length], (err, value) =>
           open pullRequests[value - 1].html_url
 
+  # Aliases
+  l: @::list
+  c: @::count
+  p: @::ping
+  o: @::open
+
   _list: (fn) =>
     async.map @config.repos, (repo, callback) =>
       [u, r] = repo.split('/')
