@@ -19,8 +19,7 @@ exports.run = ->
   program.help() unless args[0]?
 
   if args[0] is 'init'
-    initializer = new Initializer
-      global: program.global
+    initializer = new Initializer global: program.global
     initializer.run()
   else
     config = new Config program.config
