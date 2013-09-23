@@ -1,6 +1,6 @@
 {
   "name": "pending-pr",
-  "description": "The best project ever.",
+  "description": "pending-pr handles pending pull requests",
   "version": "0.1.0",
   "homepage": "https://github.com/banyan/pending-pr",
   "author": {
