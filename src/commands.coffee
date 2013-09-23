@@ -4,19 +4,9 @@ open      = require 'open'
 async     = require 'async'
 logger    = require 'loggy'
 promptly  = require 'promptly'
-GitHubApi = require 'github'
 
 module.exports = class Commands
-  GITHUB_API_VERSION: '3.0.0'
-
-  constructor: ({@program, @config}) ->
-
-    @client = new GitHubApi
-      version: @GITHUB_API_VERSION
-
-    @client.authenticate
-      type: 'oauth'
-      token: @config.token
+  constructor: ({@program, @config, @client}) ->
 
   execute: (method, options...) ->
     @[method](options...)
@@ -31,7 +21,6 @@ module.exports = class Commands
       console.log pullRequests.length
 
   show: =>
-
 
   ping: =>
     @_list (pullRequests) ->

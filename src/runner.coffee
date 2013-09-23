@@ -1,5 +1,7 @@
+program   = require 'commander'
+GitHubApi = require 'github'
+
 pkg         = require './../package'
-program     = require 'commander'
 Config      = require './config'
 Commands    = require './commands'
 Initializer = require './initializer'
@@ -22,8 +24,13 @@ exports.run = ->
     initializer.run()
   else
     config = new Config program.config
+
+    client = new GitHubApi version: '3.0.0'
+    client.authenticate type: 'oauth', token: config.token
+
     commands = new Commands
       program: program
       config: config
+      client: client
 
     commands.execute(args...)
