@@ -1,12 +1,13 @@
-_         = require 'underscore'
-fs        = require 'fs'
-async     = require 'async'
-logger    = require 'loggy'
-promptly  = require 'promptly'
+_        = require 'underscore'
+fs       = require 'fs'
+async    = require 'async'
+logger   = require 'loggy'
+sysPath  = require 'path'
+promptly = require 'promptly'
 
 module.exports = class Initializer
   fileName     = '.pending-pr'
-  templatePath = '../templates/pending-pr.tpl'
+  templatePath = sysPath.join __dirname, '..', 'templates', 'pending-pr.tpl'
 
   constructor: ({@global, @filePath}) ->
     @filePath or= if @global
