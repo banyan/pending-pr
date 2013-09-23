@@ -5,3 +5,4 @@ lib/**/*.js
 lib-cov
 .template
 /.pending-pr
+npm-debug.log
