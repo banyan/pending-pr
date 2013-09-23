@@ -1,6 +1,6 @@
 # pending-pr [![Build Status](https://secure.travis-ci.org/banyan/pending-pr.png?branch=master)](http://travis-ci.org/banyan/pending-pr)
 
-`pending-pr` is cli tool which handles pending pull requests.
+`pending-pr` is a CLI tool which handles pending pull requests.
 
 ## Motivation
 
@@ -10,11 +10,32 @@ That's why I created `pending-pr`, it's a small cli tool focusing only pending p
 
 ## Getting Started
 
-Install the module with: `npm install pending-pr`
+Install the module with:
+
+```
+$ npm install -g pending-pr
+```
+
+Create `.pending-pr` file with `init` command:
 
 ```
 $ pending-pr init
+Token: YOUR_GITHUB_OAUTH_TOKEN
+Repos: foo/bar baz/qux
+Members: banyan foo bar
+24 Sep 00:55:20 - info: create /Users/banyan/tmp/pending-pr/.pending-pr
+
+$ cat .pending-pr
+{
+    "token": "YOUR_GITHUB_OAUTH_TOKEN",
+    "repos": ["foo/baz", "baz/qux"],
+    "members": ["banyan", "foo", "bar"]
+}
 ```
+
+* `token` is your github oauth token.
+* `repos` is that you'd like to check if they have pending PRs.
+* `members` is that you'd like to mention to them.
 
 ## Usage
 
@@ -29,14 +50,16 @@ Commands:
 ```
 
 ## Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
-### Test
+### Running the Tests
 
 ```
 $ grunt test
 ```
 
 ## License
+
 Copyright (c) 2013 Kohei Hasegawa
 Licensed under the MIT license.
