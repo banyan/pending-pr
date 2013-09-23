@@ -19,7 +19,7 @@ $ pending-pr init
 ## Usage
 
 ```
-  Commands:
+Commands:
 
     init                 Create .pending-pr config file.
     list                 Show mergeble pull requests. Short-cut: l
