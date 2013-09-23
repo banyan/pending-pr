@@ -21,16 +21,21 @@ module.exports = class Commands
       console.log pullRequests.length
 
   show: =>
+    throw "NotImplementedError"
 
-  ping: =>
-    @_list (pullRequests) ->
-      _.each pullRequests, (pr, i) =>
-        console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
+  ping: (index) =>
+    @_list (pullRequests) =>
+      if @program.all
+        _.each pullRequests, (pr) =>
+          @_postComment pr
+      else if index?
+        @_postComment pullRequests[index - 1]
+      else
+        _.each pullRequests, (pr, i) =>
+          console.log "#{i + 1}: [#{pr.head.repo.name} @#{pr.user.login}]\t#{pr.title}"
 
-      console.log ""
-
-      # promptly.choose "ping to which? ", [0, 1, 2], (err, value) ->
-        # console.log "Answer:", value
+        promptly.choose "ping to which? ", [1..pullRequests.length], (err, value) =>
+          @_postComment pullRequests[value - 1]
 
   open: (number) =>
     @_list (pullRequests) =>
@@ -42,13 +47,35 @@ module.exports = class Commands
 
   _list: (fn) =>
     async.map @config.repos, (repo, callback) =>
-      [user, repo] = repo.split('/')
+      [u, r] = repo.split('/')
       @client.pullRequests.getAll {
-        user: user
-        repo: repo
+        user: u
+        repo: r
       }, callback
     , (err, results) ->
       a = _.flatten _.map results, (rows) ->
         _.filter rows, (row) -> row.url
 
       do (a) -> fn a
+
+  _postComment: (pr) =>
+    [user, repo] = pr.base.repo.full_name.split('/')
+    members = @_getMembers pr.user.login
+
+    @client.issues.createComment
+      user: user
+      repo: repo
+      number: pr.number
+      body: """
+        #{members}\n\n
+        Hi. It's mergeble. Please check and review.
+      """
+
+    console.log "Pinged to #{pr.base.repo.full_name}##{pr.number}"
+
+  _getMembers: (pullRequester) =>
+    _.chain(@config.members)
+      .without(pullRequester)
+      .map((member) -> "@#{member}")
+      .value()
+      .join ' '

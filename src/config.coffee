@@ -15,7 +15,7 @@ module.exports = class Config
     else if fs.existsSync "#{process.env['HOME']}/#{fileName}"
       "#{process.env['HOME']}/#{fileName}"
     else
-      logger.error "There's no config file. Try `pending-pr init`."
+      logger.error "There's no config file. Try `$ pending-pr init`."
       process.exit 1
 
     path
