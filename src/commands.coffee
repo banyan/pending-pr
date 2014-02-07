@@ -69,7 +69,7 @@ module.exports = class Commands
     , (err, results) =>
       rows = _.chain(results)
         .flatten()
-        .reject((result) => /wip/i.test(result.title) and !@program.unmergeble) # TODO customizable
+        .reject((result) => /wip/i.test(result?.title) and !@program.unmergeble) # TODO customizable
         .value()
 
       do (rows) -> fn rows
