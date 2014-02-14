@@ -75,6 +75,10 @@ module.exports = class Commands
       do (rows) -> fn rows
 
   _postComment: (pr) =>
+    unless pr.base?
+      console.error "cant get pr" if pr.base?
+      return
+
     [user, repo] = pr.base.repo.full_name.split('/')
     members = @_getMembers pr.user.login
 
