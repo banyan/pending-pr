@@ -69,7 +69,7 @@ module.exports = class Commands
     , (err, results) =>
       rows = _.chain(results)
         .flatten()
-        .reject((result) => /wip/i.test(result?.title) and !@program.unmergeble) # TODO customizable
+        .reject(@_exclude)
         .value()
 
       do (rows) -> fn rows
@@ -99,3 +99,7 @@ module.exports = class Commands
       .map((member) -> "@#{member}")
       .value()
       .join ' '
+
+  _exclude: (result) =>
+    title = result?.title
+    (/wip/i.test(title) or /DO\s?N'?O?T\s?MERGE/i.test(title)) and !@program.unmergeble
