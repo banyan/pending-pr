@@ -1,7 +1,7 @@
 {
   "name": "pending-pr",
   "description": "pending-pr handles pending pull requests",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "homepage": "https://github.com/banyan/pending-pr",
   "author": {
     "name": "Kohei Hasegawa",
